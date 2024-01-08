@@ -4687,3 +4687,26 @@ input, select, textarea {
 		}
 
 	}
+
+/* Return to Top Button Styles */
+.return-to-top {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 24px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.return-to-top:hover {
+  opacity: 0.8;
+}
