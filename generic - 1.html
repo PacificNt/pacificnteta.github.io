@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Financial Insights from bank statements</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Pacifique Nteta</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">About Me</a></li>
+							<li class="active"><a href="generic.html">Projects - Finacial Insights from Bank Statements</a></li>
+							<li><a href="elements.html">Highlights</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://linkedin.com/in/pacifique-nteta" target="_blank" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>	
+							<li><a href="https://github.com/PacificNt" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							
+						</ul>
+					</nav>
+
+				<!-- Main -->
+								<div id="main">
+
+									<!-- Featured Post -->
+										<article class="post featured">
+											<header class="major">
+										
+												<h3>Microsfot Excel</h3>
+											
+										
+						
+												<p style="text-align:left; margin:0; padding:0;">As mentionned ealier, the project started by importing pdf bank statemts into Excel. This was done by querying the needed data from the pdf bank statement into Excel. A copy of one of the bank statements to see how the bank statements looked and have an idea of which data were excluded and which ones were queried into Excel can be accessed <a href="https://drive.google.com/file/d/1VPtUB5XnUcUu6Ww4U4KzSvJ2HFccWM-7/view?usp=sharing" ><strong>here.</strong></a></p>
+												
+												
+												<p style="text-align:left; margin:0; padding:0;"> After querying the needed data to Excel, I then did an initial cleaning by transforming the data before loading it using Power Query. With Power Query, I removed empty columns created when querying the data from pdf to Excel, I merged some columns, changed some data types and replace values such as 'null' by '0'. After transforming and loading the data, I did some more cleaning by replacing the year '2024' in the 'date' column by '2023' as in the initial tables from the pdf files, there was no year so Power Query assumed that it was '2024'.  I repeated these steps for all the 8 bank statements from June 2023 to January 2024; I only kept the year '2024' for the January bank statement. In the last step, I combined all the tables/bank statements into one named 'June_to_January' by appending the tables.</p>
+											<a href="https://1drv.ms/x/s!AgZHajPDAbckhi3ZeZvMGgIx8KvO?e=YoZnxM" target="_blank" rel="noreferrer noopener" class="image main"><img src="images/Excel Overview.png" alt="" /></a>
+											
+											<p style="text-align:left; margin:0; padding:0;">The pre-cleaned 'June_to_January' table as well as the individual tables for each month can be accessed <a href="https://1drv.ms/x/s!AgZHajPDAbckhi3ZeZvMGgIx8KvO?e=YoZnxM" target="_blank" rel="noreferrer noopener" ><strong>here.</strong></a></p>
+											
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            
+                                            <header class="major">
+										
+												<h3>SQL Server</h3>
+											
+										
+						
+												<p style="text-align:left; margin:0; padding:0;">After pre-cleaning the data in Excel, I imported the data in SQL Server to further clean it before working with it. I started by checking if the table was perfectly imported and checked errors on which to resume the data cleaning. And after that I aslo checked the data types of all the columns to see where conversion will be applicable.</p>
+                                                <a href="images/Financial Insights Project - Table Check.png"  class="image main"><img src="images/Financial Insights Project - Table Check.png" alt="" /></a>
+                                                <a href="images/Financial Insights Project - Data Type Check.png"  class="image main"><img src="images/Financial Insights Project - Data Type Check.png" alt="" /></a>
+
+
+											<p>The following points/errors were noticed : </p>
+                                            <ul>
+                                                <li>The presence of letters <b>('Cr')</b> in the columns 'Amount' and 'Balance'. These two columns are supposed to contain numbers only, the presence of 'Cr' will not make calculations on these columns possible.</li>
+                                                <li>The presence of commas <b>(',')</b> in instead of full stops('.') to delimit decimals in the 'Amount' column. This will also make calculations in this column. These two issues will be addressed later.</li>
+                                                <li>The columns 'Amount' and 'Balance' are <b>NVARCHAR</b> which is a strong data type but it should be a number data type. And the 'Date' column apprears as 'datetime' but since the time part doesn't reflect any info, we can keep it just as 'date'. These will be fixed later.</li>
+                                              </ul>
+
+                                             
+                                            
+
+
+                                              <p style="text-align:left; margin:0; padding:0;">After noticing the problems mentionned above, I then proceeded to address them. I started by removing the commas ',' as decimal delimiters and replaced them with full stops '.'. After this I proceeded to change data type of the 'Date' column from <b>"datetime"</b> to <b>"date"</b>. After this, I cleaned the 'Description' column by removing '[image]' that was present in some rows.</p>
+                                              &nbsp;&nbsp;&nbsp;&nbsp; 
+                                              <p>Replacing the commas.<a href="images/Financial Insights Project - Commas replacement.png"  class="image main"><img src="images/Financial Insights Project - Commas replacement.png" alt="" /></a></p>
+                                            
+                                              <p>Converting 'Date' into "date" data type.<a href="images/Financial Insights Project - Convert data.png"  class="image main"><img src="images/Financial Insights Project - Convert data.png" alt="" /></a></P>
+                                              
+                                              <p>Cleaning the 'Date' Column.<a href="images/Financial Insights Project - Clean Description Column.png"  class="image main"><img src="images/Financial Insights Project - Clean Description Column.png" alt="" /></a></p>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                            
+                                            
+                                              <p style="text-align:left; margin:0; padding:0;">After doing the first part of cleaning, I added new columns : Columns <b>'Amount_Clean'</b> and <b>'Balance_Clean'</b> to contain cleaned version of columns 'Amount' and 'Balance', and columns <b>'TransactionType'</b>, <b>'Category'</b> and <b>Subcategory</b> to categorize the transactions. And I then proceeded to set conditions to add values in the created columns and check if the values were addeed correctly.</p>
+                                                &nbsp;&nbsp;&nbsp;&nbsp; 
+                                              <p>Adding Columns.<a href="images/Financial Insights Project - Adding new columns.png"  class="image main"><img src="images/Financial Insights Project - Adding new columns.png" alt="" /></a></p>
+                                              <p>Clean 'Balance'<a href="images/Financial Insights Project - Set values for 'Balance_Clean'.png"  class="image main"><img src="images/Financial Insights Project - Set values for 'Balance_Clean'.png" alt="" /></a></p>
+                                              <p>Clean 'Amount'<a href="images/Financial Insights Project - Set values form 'Amount_Clean'.png"  class="image main"><img src="images/Financial Insights Project - Set values form 'Amount_Clean'.png" alt="" /></a></p>
+                                               
+                                              <P>Inserting values in 'TransactionType'.<a href="images/Financial Insights Project - Set values for 'TransactionType'.png"  class="image main"><img src="images/Financial Insights Project - Set values for 'TransactionType'.png" alt="" /></a></p>
+                                              <p>Values for Credit 'Category'<a href="images/Financial Insights Project - category - Credit.png"  class="image main"><img src="images/Financial Insights Project - category - Credit.png" alt="" /></a></p>
+                                              <p>Values for Debit 'Category'<a href="images/Financial Insights Project - Category - Debit.png"  class="image main"><img src="images/Financial Insights Project - Category - Debit.png" alt="" /></a></p>
+                                              <p>Values for Debit 'SubCategory'<a href="images/Financial Insights Project - SubCategory Debit.png"  class="image main"><img src="images/Financial Insights Project - SubCategory Debit.png" alt="" /></a></p>
+                                              <p>Values Check 1<a href="images/Financial Insights Project - Values Check 1.png"  class="image main"><img src="images/Financial Insights Project - Values Check 1.png" alt="" /></a></p>
+                                              <p>Values Check 2<a href="images/Financial Insights Project - Values Check 2.png"  class="image main"><img src="images/Financial Insights Project - Values Check 2.png" alt="" /></a></p>
+                                              <p style="text-align:left; margin:0; padding:0;">In the final step of the cleaning process, I created a table <b></b>'BankStatement'</b> to contain only the needed and clean columns. I first created the new table with its columns and specified data types and then inserted the needed columns from the 'JuneToJanuary' column. </p>
+                                             &nbsp;&nbsp;&nbsp;&nbsp; 
+                                              <p>New table 'BankStatement'.<a href="images/Financial Insights Project - Bank Statement.png"  class="image main"><img src="images/Financial Insights Project - Bank Statement.png" alt="" /></a></p>
+                                              <p>Inserting the needed columns(values)<a href="images/Financial Insights Project - Bank statement values.png"  class="image main"><img src="images/Financial Insights Project - Bank statement values.png" alt="" /></a></p>
+                                              <p>'BankStatement' table check<a href="images/Financial Insights Project - Bank Statement Check.png"  class="image main"><img src="images/Financial Insights Project - Bank Statement Check.png" alt="" /></a></p>
+                                              <p>Checking for duplicates<a href="images/Financial Insights Project - Duplicates Check.png"  class="image main"><img src="images/Financial Insights Project - Duplicates Check.png" alt="" /></a></p>
+                                             &nbsp;&nbsp;&nbsp;&nbsp; 
+                                              <p style="text-align:left; margin:0; padding:0;">With the final step of the cleaning process done, I then proceeded to delve deeper into the data by diving into expense and income tracking. I explore metrics such as contribution percentage for all debit and credit transactions, debit and credit categories and subcategories contribution, highest, lowest and average spending on debit subcategories, highest and lowest credit registered, highest, lowest and average balance, and many more metrics.</p>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;
+                                              <p>Contribution percentage for credit categories<a href="images/Financial Insights Project - Contribution Percentage -Credit.png"  class="image main"><img src="images/Financial Insights Project - Contribution Percentage -Credit.png" alt="" /></a></p>
+                                              <p>Highest Cash Deposit<a href="images/Financial Insights Project - Highest Deposit.png"  class="image main"><img src="images/Financial Insights Project - Highest Deposit.png" alt="" /></a></p>
+                                              <p>Contribution percentage for debit categories<a href="images/Financial Insights Project - Contribution Percentage - Debit.png"  class="image main"><img src="images/Financial Insights Project - Contribution Percentage - Debit.png" alt="" /></a></p>
+                                              <p>Contribution percentage of debit subcategories<a href="images/Financial Insights Project - Contribution percentage of Subcategories under 'Purchases & Payments'.png"  class="image main"><img src="images/Financial Insights Project - Contribution percentage of Subcategories under 'Purchases & Payments'.png" alt="" /></a></p>
+                                              <p>Total monthly spending on 'Purchases & Payments'<a href="images/Financial Insights Project - Total Purchases Per Month.png"  class="image main"><img src="images/Financial Insights Project - Total Purchases Per Month.png" alt="" /></a></p> 
+                                              <p>Total monthly spending on 'Groceries & Toiletries'<a href="images/Financial Insights Project - Total Spending on Groceries per month.png"  class="image main"><img src="images/Financial Insights Project - Total Spending on Groceries per month.png" alt="" /></a></p>
+                                              <p>Highest balance<a href="images/Financial Insights Project - Highest Balance.png"  class="image main"><img src="images/Financial Insights Project - Highest Balance.png" alt="" /></a></p>
+                                              <p>Lowest Balance<a href="images/Financial Insights Project - Lowest Balance.png"  class="image main"><img src="images/Financial Insights Project - Lowest Balance.png" alt="" /></a></p>
+                                              <p style="text-align:left; margin:0; padding:0;">To see the rest of the queries made on income and expense tracking, please click <a href="https://github.com/PacificNt/Financial-Insights-from-Bank-Statement?tab=readme-ov-file" target="_blank" rel="noreferrer noopener" ><strong>here.</strong></a> </p>
+                                              &nbsp;&nbsp;&nbsp;&nbsp;
+                                              <h4>Insights Summary</h4>
+                                              <ul>
+                                                <li style="text-align:left; margin:0; padding:0;">+/- 83%(or R30100) of incoming money in the account from June 2023(the 15th) to January 2024(the 15th) came from ATM Cash Deposit, while only 5%(R1884) came from the savings account. The remaining contribution(~11% or R4148.44) is classified as other. But since it represent a good 11% of the total contribution, it is also important to have a closer look at it and find out, what it represents.</li>
+                                                <li style="text-align:left; margin:0; padding:0;">'Other' in the credit transactions represent, we can see that this category contains transactions such as payment/transfer received from other Bank accounts as well as an Inward Swift which represent a money transfer from a foreign bank account.</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The highest Cash deposited on the account is R7100 and it was deposited on the 20th of November 2023 and as per the description it is referred to as 'Laptop Money'.</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The biggest contribustion(around 32% of total) in this 'Purchases & Payments'(which accounts around 81% of all debit transactions) category is classified as 'Other'(We will have a closer look at it after). The second biggest contribution is 'Tuition Fees' which accounts around 31% of total contribution or R8860. The result shows that around R2062(or around 7%) was spent on 'Airtime' which is quite close to the amount spent on 'Groceries & Toiletries'(R2384.92 or around 8%). We can aslo hihlights 'Ride Services' wich accounts around 1% of total 'Purchase & Payments'. It is important to note here the the amount on 'Ride Services' doest not really reflect the reality as this reflects only rides that we paid with the Bank card; the rides paid in cash are not reflected here.</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The month of October was the month with the highest spending on 'Purchases & Payments' with R1276.30</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The month of October was the month with the highest spending on 'Purchases & Payments' with R1276.30</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The month of November was the month with the highest spending on 'Airtime.</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The month of September was the month with the highest spendind on 'Groceries & Toiletries' with R728.45 while the month of July had the lowest amount spent on 'Groceries & Toiletries' with just R95.06</li>
+                                                <li style="text-align:left; margin:0; padding:0;">June was the month with the highest 'Banking Fees'(R150)</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The highest 'Balance' registered in the account was R14226.44 and that was registered on the 12th of December 2023.</li>
+                                                <li style="text-align:left; margin:0; padding:0;">The lowest 'Balance' was R0.45 and it was registered on the 27th of December 2023.</li>
+                                              </ul>
+                                              
+
+                                    
+												
+											
+										</article>
+
+					
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section>
+					 <h2> Contact</h2>
+						<section>
+							<h3>Phone</h3>
+							<p><a href="#">(+27) 62 252 0309</a></p>
+						
+						<section>
+							<h3>Email</h3>
+							<p><a href="#">pacific.nteta@gmail.com</a></p>
+						
+						<section>
+							<h3>Social</h3>
+							<ul class="icons alt">
+							
+								<li><a href="https://linkedin.com/in/pacifique-nteta" target="_blank" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							
+								<li><a href="https://github.com/PacificNt" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							</ul>
+							
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li>&copy; Modified by Pacifique Nteta</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
